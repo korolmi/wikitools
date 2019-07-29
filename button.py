@@ -35,6 +35,17 @@ def getSignDate ( id, signee ):
         return "Jan 01, 2019"
     return ""
 
+def wikiLogin():
+    """ login в confluence - лучше использовать техническую учетку, плохо, что виден пароль... """
+
+    if sys.version_info.major<3:
+        server = xmlrpclib.ServerProxy('http://172.16.108.41/rpc/xmlrpc')
+    else:
+        server = xmlrpc.client.ServerProxy('http://172.16.108.41/rpc/xmlrpc')
+    token = server.confluence2.login('имя пользователя', 'пароль')
+
+    return server, token
+
 # шаблон страницы - начало
 resHtml = """
 <!DOCTYPE HTML>
